@@ -125,8 +125,8 @@ int main()
                 team[number]=i;  //number被分配给第i队
             }
         }
-        queue<int> teamq;
-        queue<int> teamqueue[1005];
+        queue<int> teamq;       //标记每个队的先后顺序
+        queue<int> teamqueue[1005];     //为每一个队定义一个queue，存每次enqueue的元素
         string operations;
         cin>>operations;
         while(operations!="STOP")
@@ -135,24 +135,24 @@ int main()
             {
                int NewNumber;
                cin>>NewNumber;
-                if (teamqueue[team[NewNumber]].empty())
+                if (teamqueue[team[NewNumber]].empty())    //如果新入队的元素没有属于它的队
                 {
-                    teamq.push(team[NewNumber]);
-                    teamqueue[team[NewNumber]].push(NewNumber);
+                    teamq.push(team[NewNumber]); //在teamq中添加新入队元素的队伍号码
+                    teamqueue[team[NewNumber]].push(NewNumber);  //在teamqueue中加入新入队元素
                 }
                 else
                 {
-                    teamqueue[team[NewNumber]].push(NewNumber);
+                    teamqueue[team[NewNumber]].push(NewNumber); //有自己的队，直接在teamqueue中加入新入队元素
                 }
             }
 
             if (operations=="DEQUEUE")
             {
-                cout<<teamqueue[teamq.front()].front()<<endl;
-              teamqueue[teamq.front()].pop();
-              if(teamqueue[teamq.front()].empty())
+                cout<<teamqueue[teamq.front()].front()<<endl; //获取teamqueue首端元素
+              teamqueue[teamq.front()].pop();    //从teamqueue首端弹出元素
+              if(teamqueue[teamq.front()].empty())       //弹出的元素所在队没有元素了
               {
-                  teamq.pop();
+                  teamq.pop();             //在teamq中弹出这个队的号码
               }
             }
             
